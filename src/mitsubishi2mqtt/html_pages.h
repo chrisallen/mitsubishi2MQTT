@@ -191,7 +191,7 @@ const char html_page_control[] PROGMEM =
             "<form onchange='this.submit()' method='POST'>"
                 "<select name='FAN'>"
                     "<option value='AUTO' _FAN_A_>&#9851; _TXT_F_AUTO_</option>"
-                    "<option value='QUIET' _FAN_QUIET_>.... _TXT_F_QUIET_</option>"
+                    "<option value='QUIET' _FAN_Q_>.... _TXT_F_QUIET_</option>"
                     "<option value='1' _FAN_1_>...: _TXT_F_SPEED_ 1</option>"
                     "<option value='2' _FAN_2_>..:: _TXT_F_SPEED_ 2</option>"
                     "<option value='3' _FAN_3_>.::: _TXT_F_SPEED_ 3</option>"
