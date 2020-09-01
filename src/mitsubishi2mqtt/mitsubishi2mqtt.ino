@@ -146,18 +146,18 @@ void setup() {
     if (loadMqtt()) {
       //write_log("Starting MQTT");
       // setup HA topics
-      ha_power_set_topic    = mqtt_topic + "/" + mqtt_fn + "/power/set";
-      ha_mode_set_topic     = mqtt_topic + "/" + mqtt_fn + "/mode/set";
-      ha_temp_set_topic     = mqtt_topic + "/" + mqtt_fn + "/temp/set";
+      ha_power_set_topic       = mqtt_topic + "/" + mqtt_fn + "/power/set";
+      ha_mode_set_topic        = mqtt_topic + "/" + mqtt_fn + "/mode/set";
+      ha_temp_set_topic        = mqtt_topic + "/" + mqtt_fn + "/temp/set";
       ha_remote_temp_set_topic = mqtt_topic + "/" + mqtt_fn + "/remote_temp/set";
-      ha_fan_set_topic      = mqtt_topic + "/" + mqtt_fn + "/fan/set";
-      ha_vane_set_topic     = mqtt_topic + "/" + mqtt_fn + "/vane/set";
-      ha_wideVane_set_topic = mqtt_topic + "/" + mqtt_fn + "/wideVane/set";
-      ha_settings_topic     = mqtt_topic  + "/" + mqtt_fn + "/settings";
-      ha_state_topic        = mqtt_topic  + "/" + mqtt_fn + "/state";
-      ha_debug_topic        = mqtt_topic + "/" + mqtt_fn + "/debug";
-      ha_debug_set_topic    = mqtt_topic + "/" + mqtt_fn + "/debug/set";
-      ha_custom_packet      = mqtt_topic + "/" + mqtt_fn + "/custom/send";
+      ha_fan_set_topic         = mqtt_topic + "/" + mqtt_fn + "/fan/set";
+      ha_vane_set_topic        = mqtt_topic + "/" + mqtt_fn + "/vane/set";
+      ha_wideVane_set_topic    = mqtt_topic + "/" + mqtt_fn + "/wideVane/set";
+      ha_settings_topic        = mqtt_topic + "/" + mqtt_fn + "/settings";
+      ha_state_topic           = mqtt_topic + "/" + mqtt_fn + "/state";
+      ha_debug_topic           = mqtt_topic + "/" + mqtt_fn + "/debug";
+      ha_debug_set_topic       = mqtt_topic + "/" + mqtt_fn + "/debug/set";
+      ha_custom_packet         = mqtt_topic + "/" + mqtt_fn + "/custom/send";
 
       if (others_haa) {
         ha_config_topic       = others_haa_topic + "/climate/" + mqtt_fn + "/config";
