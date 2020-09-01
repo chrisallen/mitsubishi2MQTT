@@ -935,6 +935,9 @@ void handleControl() {
   else if (strcmp(settings.wideVane, ">>") == 0) {
     controlPage.replace("_WVANE_5_", "selected");
   }
+  else if (strcmp(settings.wideVane, "<>") == 0) {
+    controlPage.replace("_WVANE_6_", "selected");
+  }
   else if (strcmp(settings.wideVane, "SWING") == 0) {
     controlPage.replace("_WVANE_S_", "selected");
   }
@@ -1210,6 +1213,7 @@ void hpSettingsChanged() {
   rootInfo["temperature"]     = getTemperature(currentSettings.temperature, useFahrenheit);
   rootInfo["fan"]             = currentSettings.fan;
   rootInfo["vane"]            = currentSettings.vane;
+  rootInfo["wideVane"]        = currentSettings.wideVane;
 
   String hppower = String(currentSettings.power);
   String hpmode = String(currentSettings.mode);
@@ -1290,6 +1294,7 @@ void hpStatusChanged(heatpumpStatus currentStatus) {
   //rootInfo["operating"]       = currentStatus.operating;
   rootInfo["fan"]             = currentSettings.fan;
   rootInfo["vane"]            = currentSettings.vane;
+  rootInfo["wideVane"]        = currentSettings.wideVane;
   rootInfo["action"]          = hpGetAction();
   rootInfo["mode"]            = hpGetMode();
   String mqttOutput;
@@ -1335,6 +1340,7 @@ void hpSendDummy(String name, String value, String name2, String value2) {
   rootInfo["temperature"]     = getTemperature(currentSettings.temperature, useFahrenheit);
   rootInfo["fan"]             = currentSettings.fan;
   rootInfo["vane"]            = currentSettings.vane;
+  rootInfo["wideVane"]        = currentSettings.wideVane;
   rootInfo["action"]          = hpGetAction();
   rootInfo["mode"]            = hpGetMode();
   rootInfo[name] = value;
@@ -1425,6 +1431,14 @@ void mqttCallback(char* topic, byte* payload, unsigned int length) {
     root["vane"] = message;
     hpSendDummy("vane", message, "", "");
     hp.setVaneSetting(message);
+    hp.update();
+  }
+  else if (strcmp(topic, ha_vane_set_topic.c_str()) == 0) {
+    const size_t bufferSize = JSON_OBJECT_SIZE(2);
+    StaticJsonDocument<bufferSize> root;
+    root["wideVane"] = message;
+    hpSendDummy("wideVane", message, "", "");
+    hp.setWideVaneSetting(message);
     hp.update();
   }
   else if (strcmp(topic, ha_remote_temp_set_topic.c_str()) == 0) {
@@ -1582,6 +1596,7 @@ void mqttConnect() {
       mqtt_client.subscribe(ha_fan_set_topic.c_str());
       mqtt_client.subscribe(ha_temp_set_topic.c_str());
       mqtt_client.subscribe(ha_vane_set_topic.c_str());
+      mqtt_client.subscribe(ha_wideVane_set_topic.c_str());
       mqtt_client.subscribe(ha_remote_temp_set_topic.c_str());
       mqtt_client.subscribe(ha_custom_packet.c_str());
       if (others_haa) {
